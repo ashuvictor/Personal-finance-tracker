@@ -12,6 +12,7 @@ import Button from "../Button";
 import "./styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function SignupSigninComponent() {
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ function SignupSigninComponent() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loginForm, setLoginForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validateForm = () => {
     if (!email.trim()) {
@@ -56,6 +58,7 @@ function SignupSigninComponent() {
       );
       const user = userCredential.user;
       await createDoc(user, name, email);
+      navigate("/dashboard");
       toast.success(`Account created successfully for ${name}!`);
     } catch (err) {
       toast.error(err.message);
@@ -77,6 +80,7 @@ function SignupSigninComponent() {
         password
       );
       const user = userCredential.user;
+      navigate("/dashboard");
       toast.success(`Welcome back, ${user.displayName || "User"}!`);
     } catch (err) {
       toast.error(err.message);
@@ -91,6 +95,7 @@ function SignupSigninComponent() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       await createDoc(user, user.displayName, user.email); // Add user to Firestore if not exists
+      navigate("/dashboard");
       toast.success(
         `Welcome, ${user.displayName}! You've signed in with Google.`
       );
