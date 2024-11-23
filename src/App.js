@@ -1,12 +1,16 @@
-import './App.css';
-import Header from './components/Header';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import SignUp from "./pages/SignUp";
 function App() {
   return (
-    <div className="App">
-      <Header/>
-    <h1>Hello</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+export default App; 

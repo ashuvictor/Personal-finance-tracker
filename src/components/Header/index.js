@@ -2,9 +2,13 @@ import React from 'react'
 import "./styles.css"
 
 function Header () {
+    function logoutFunction () {
+        alert("You clicked on logout");
+    }
   return (
     <div className='navbar'>
-      Header
+      <p className='logo'>Financely</p>
+      <p className='logo link ' onClick={logoutFunction}>Logout</p>
     </div>
   )
 }
