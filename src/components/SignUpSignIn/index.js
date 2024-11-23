@@ -8,8 +8,10 @@ function SignupSigninComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  function signUpwithEmail () {
-    console.log("Check")
+  function signUpwithEmail() {
+    console.log("Check");
+    //authenticate the user
+    
   }
 
   return (
@@ -33,22 +35,25 @@ function SignupSigninComponent() {
           placeholder={"john@gmail.com"}
         />{" "}
         <Input
-        type="password"
+          type="password"
           label={"Password"}
           state={password}
           setState={setPassword}
           placeholder={"Example :123456"}
         />{" "}
         <Input
-        type="password"
+          type="password"
           label={"Confirm Password"}
           state={confirmPassword}
           setState={setConfirmPassword}
           placeholder={"Example:123456"}
         />
-        <Button text ={"Sign up using email and password"} onClick={signUpwithEmail}/>
-        <p style={{textAlign:"center"}}>Or</p>
-        <Button text ={"Sign up using google"} blue/>
+        <Button
+          text={"Sign up using email and password"}
+          onClick={signUpwithEmail}
+        />
+        <p style={{ textAlign: "center" }}>Or</p>
+        <Button text={"Sign up using google"} blue />
       </form>
     </div>
   );
