@@ -1,97 +1,119 @@
-/* Filters Container */
-.filters-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* Allows wrapping for small screens */
-    margin-bottom: 1.5rem; /* Space between filters and the table */
-    gap: 1rem; /* Space between filter elements */
-    padding: 0 1rem; /* Horizontal padding */
-  }
-  
-  /* Search Input with Icon */
-  .input-flex {
-    display: flex;
-    align-items: center;
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
-    padding: 0.5rem 1rem; /* Padding around input */
-    width: 100%;
-    max-width: 300px; /* Limit width for consistency */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .search-input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 1rem;
-    background-color: transparent;
-    margin-left: 0.5rem; /* Space between icon and input */
-  }
-  
-  /* Dropdown Filter */
-  .select-input {
-    width: 150px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Radio Button Group */
-  .radio-group {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .radio-group .ant-radio-button-wrapper {
-    height: 40px; /* Consistent height */
-    padding: 0.5rem 1rem; /* Padding inside radio buttons */
-    font-size: 0.9rem;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  /* Highlight selected radio button */
-  .radio-group .ant-radio-button-wrapper-checked {
-    background-color: #2970ff;
-    color: #fff;
-    border-color: #2970ff;
-  }
-  
-  /* Transactions Table */
-  .transactions-table {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .ant-table-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 1rem;
-  }
-  
-  .ant-table-thead > tr > th {
-    background-color: #f6f6f6;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .ant-table-tbody > tr > td {
-    text-align: center;
-  }
-  
-  /* General Button Styling for Consistency */
-  .ant-radio-button-wrapper,
-  .ant-btn {
-    height: 40px;
-    font-size: 1rem;
-    border-radius: 8px;
-    padding: 0 1rem;
-  }
-  
+/* Row for Filters: Input and Dropdown */
+.filters-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+/* Input Styling */
+.input-flex {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  max-width: 300px; /* Limits the width for a clean layout */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background-color: transparent;
+  margin-left: 0.5rem;
+}
+
+/* Dropdown Filter */
+.select-input {
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Actions Row */
+.actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Transactions Heading */
+.transactions-heading {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Centered Sort Buttons */
+.center-sort-buttons {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Export and Import Buttons */
+.export-import-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* General Button Styling */
+button.btn {
+  height: 40px;
+  min-width: 150px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid #2970ff;
+  background-color: #2970ff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button.btn:hover {
+  background-color: #1353d4;
+  border-color: #1353d4;
+}
+
+button.btn-blue {
+  height: 40px;
+  min-width: 150px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  background-color: #f6f6f6;
+  color: black;
+}
+
+button.btn-blue:hover {
+  background-color: #e6e6e6;
+}
+
+/* Radio Button Group */
+.radio-group .ant-radio-button-wrapper {
+  height: 40px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.radio-group .ant-radio-button-wrapper-checked {
+  background-color: #2970ff;
+  color: white;
+  border-color: #2970ff;
+}

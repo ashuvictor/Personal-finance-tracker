@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Select, Table, Radio } from "antd";
 import "./styles.css";
-import searchImg from "../../assets/search.svg"
+import searchImg from "../../assets/search.svg";
 const { Option } = Select;
 
 function TransactionsTable({ transactions }) {
@@ -70,59 +70,78 @@ function TransactionsTable({ transactions }) {
   }));
 
   return (
-    <>
-     <div className="filters-container">
-  {/* Search Input */}
-  <div className="input-flex">
-    <img src={searchImg} width="16" alt="Search" />
-    <input
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      placeholder="Search by Name"
-      className="search-input"
-    />
+<>
+  {/* First Line: Search by Name and Filter by Type */}
+  <div className="filters-row">
+    <div className="input-flex">
+      <img src={searchImg} width="16" alt="Search" />
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search by Name"
+        className="search-input"
+      />
+    </div>
+
+    <Select
+      className="select-input"
+      placeholder="Filter by Type"
+      allowClear
+      value={typeFilter}
+      onChange={(value) => {
+        setTypeFilter(value);
+      }}
+    >
+      <Option value="">All</Option>
+      <Option value="income">Income</Option>
+      <Option value="expense">Expense</Option>
+    </Select>
   </div>
 
-  {/* Dropdown Filter */}
-  <Select
-    className="select-input"
-    placeholder="Filter by Type"
-    allowClear
-    value={typeFilter}
-    onChange={(value) => {
-      setTypeFilter(value);
-    }}
-  >
-    <Option value="">All</Option>
-    <Option value="income">Income</Option>
-    <Option value="expense">Expense</Option>
-  </Select>
+  {/* Second Line: Heading, Sort Buttons, Export/Import */}
+  <div className="actions-row">
+    <h2 className="transactions-heading">Transactions</h2>
 
-  {/* Sorting Options */}
-  <Radio.Group
-    className="radio-group"
-    value={sortKey}
-    onChange={(e) => {
-      setSortKey(e.target.value);
-    }}
-  >
-    <Radio.Button value="">No Sort</Radio.Button>
-    <Radio.Button value="date">Sort By Date</Radio.Button>
-    <Radio.Button value="amount">Sort By Amount</Radio.Button>
-  </Radio.Group>
-</div>
+    <div className="center-sort-buttons">
+      <Radio.Group
+        className="radio-group"
+        value={sortKey}
+        onChange={(e) => {
+          setSortKey(e.target.value);
+        }}
+      >
+        <Radio.Button value="">No Sort</Radio.Button>
+        <Radio.Button value="date">Sort By Date</Radio.Button>
+        <Radio.Button value="amount">Sort By Amount</Radio.Button>
+      </Radio.Group>
+    </div>
 
-<div className="transactions-table">
-  <Table
-    columns={columns}
-    dataSource={dataSource}
-    bordered
-    title={() => <h2>Transactions</h2>}
-    pagination={{ pageSize: 6 }} // Show 6 transactions per page
-  />
-</div>
+    <div className="export-import-buttons">
+      <button className="btn">Export to CSV</button>
+      <label htmlFor="file-csv" className="btn btn-blue">
+        Import from CSV
+      </label>
+      <input
+        id="file-csv"
+        type="file"
+        accept=".csv"
+        required
+        style={{ display: "none" }}
+      />
+    </div>
+  </div>
 
-    </>
+  {/* Transactions Table */}
+  <div className="transactions-table">
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      bordered
+      pagination={{ pageSize: 6 }}
+    />
+  </div>
+</>
+
   );
 }
 
