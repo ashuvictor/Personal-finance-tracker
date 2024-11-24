@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Cards from "../components/Cards";
-import moment from "moment";
 import AddExpenseModal from "../components/Modals/addExpense";
 import AddIncomeModal from "../components/Modals/addIncome";
 import { db } from "../firebase";
@@ -11,6 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import TransactionsTable from "../components/TransactionsTable";
+import ChartComponent from "../components/Charts";
+import NoTransactions from "./NoTransactions";
+
 function Dashboard() {
   const [user] = useAuthState(auth);
   const [transactions, setTransactions] = useState([]);
@@ -39,7 +41,7 @@ function Dashboard() {
   const onFinish = async (values, type) => {
     const newTransaction = {
       type: type,
-      date: (values.date).format("YYYY-MM-DD"),
+      date: values.date.format("YYYY-MM-DD"),
       amount: parseFloat(values.amount),
       tag: values.tag,
       name: values.name,
@@ -82,6 +84,10 @@ function Dashboard() {
     }
   };
 
+  useEffect(() => {
+    fetchTransactions();
+  }, [user]);
+
   // Recalculate totals when transactions change
   useEffect(() => {
     const income = transactions
@@ -97,10 +103,6 @@ function Dashboard() {
     setCurrentBalance(income - expenses);
   }, [transactions]);
 
-  useEffect(() => {
-    fetchTransactions();
-  }, [user]);
-
   const resetTransactions = () => {
     setTransactions([]);
     setTotalIncome(0);
@@ -108,6 +110,10 @@ function Dashboard() {
     setCurrentBalance(0);
     toast.info("Transactions reset locally.");
   };
+
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
 
   return (
     <div>
@@ -121,6 +127,11 @@ function Dashboard() {
         showIncomeModal={showIncomeModal}
         reset={resetTransactions}
       />
+      {transactions.length !== 0 ? (
+        <ChartComponent sortedTransactions={sortedTransactions} />
+      ) : (
+        <NoTransactions />
+      )}
       <AddExpenseModal
         isExpenseModalVisible={isExpenseModalVisible}
         handleExpenseCancel={handleExpenseCancel}
@@ -131,7 +142,7 @@ function Dashboard() {
         handleIncomeCancel={handleIncomeCancel}
         onFinish={(values) => onFinish(values, "income")}
       />
-      <TransactionsTable transactions={transactions} addTransaction={addTransaction} fetchTransactions={fetchTransactions}/>
+      <TransactionsTable transactions={transactions} />
     </div>
   );
 }
