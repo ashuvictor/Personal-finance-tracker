@@ -131,7 +131,7 @@ function Dashboard() {
         handleIncomeCancel={handleIncomeCancel}
         onFinish={(values) => onFinish(values, "income")}
       />
-      <TransactionsTable transactions={transactions}/>
+      <TransactionsTable transactions={transactions} addTransaction={addTransaction} fetchTransactions={fetchTransactions}/>
     </div>
   );
 }
