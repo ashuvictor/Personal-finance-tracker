@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-
+import TransactionsTable from "../components/TransactionsTable";
 function Dashboard() {
   const [user] = useAuthState(auth);
   const [transactions, setTransactions] = useState([]);
@@ -39,7 +39,7 @@ function Dashboard() {
   const onFinish = async (values, type) => {
     const newTransaction = {
       type: type,
-      date: moment(values.date).format("YYYY-MM-DD"),
+      date: (values.date).format("YYYY-MM-DD"),
       amount: parseFloat(values.amount),
       tag: values.tag,
       name: values.name,
@@ -131,6 +131,7 @@ function Dashboard() {
         handleIncomeCancel={handleIncomeCancel}
         onFinish={(values) => onFinish(values, "income")}
       />
+      <TransactionsTable transactions={transactions}/>
     </div>
   );
 }
